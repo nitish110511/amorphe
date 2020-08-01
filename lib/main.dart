@@ -6,6 +6,8 @@ import 'Widgets/FormCard.dart';
 import 'Widgets/SocialIcons.dart';
 import 'CustomIcons.dart';
 import 'package:flutter/src/material/colors.dart';
+
+
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -27,7 +29,7 @@ class _MyAppState extends State<MyApp> {
       image: Image.asset('assets/logo.jpg'
       ),
       styleTextUnderTheLoader: new TextStyle(),
-      photoSize: 210.0,
+      photoSize: 200.0,
       loadingText: Text('Mark the Elegance of your home',
         style: TextStyle(
             fontSize: 16.0, fontFamily: "Poppins-Medium")),
@@ -39,31 +41,6 @@ class _MyAppState extends State<MyApp> {
 
 class Loginpage extends StatelessWidget {
   @override
-
-  bool _isSelected = false;
-
-  void _radio() {
-    setState() {
-      _isSelected = !_isSelected;
-    };
-  }
-
-  Widget radioButton(bool isSelected) => Container(
-    width: 16.0,
-    height: 16.0,
-    padding: EdgeInsets.all(2.0),
-    decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(width: 2.0, color: Colors.black)),
-    child: isSelected
-        ? Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration:
-      BoxDecoration(shape: BoxShape.circle, color: Colors.black),
-    )
-        : Container(),
-  );
 
   Widget horizontalLine() => Padding(
     padding: EdgeInsets.symmetric(horizontal: 16.0),
@@ -90,7 +67,6 @@ class Loginpage extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.only(top: 20.0),
-                //child: Image.asset("assets/image_01.png"),
               ),
               Expanded(
                 child: Container(),
@@ -114,66 +90,13 @@ class Loginpage extends StatelessWidget {
                   ),
 
                   SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(80),
+                    height: ScreenUtil.getInstance().setHeight(30),
                   ),
                   FormCard(),
-                  SizedBox(height: ScreenUtil.getInstance().setHeight(40)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 12.0,
-                          ),
-                          GestureDetector(
-                            onTap: _radio,
-                            child: radioButton(_isSelected),
-                          ),
-                          SizedBox(
-                            width: 8.0,
-                          ),
-                          Text("Remember me",
-                              style: TextStyle(
-                                  fontSize: 12, fontFamily: "Poppins-Medium"))
-                        ],
-                      ),
-                      InkWell(
-                        child: Container(
-                          width: ScreenUtil.getInstance().setWidth(330),
-                          height: ScreenUtil.getInstance().setHeight(100),
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(colors: [
-                                Color(0xFF00c853),
-                                Color(0xFF6078ea)
-                              ]),
-                              borderRadius: BorderRadius.circular(6.0),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Color(0xFF6078ea).withOpacity(.3),
-                                    offset: Offset(0.0, 8.0),
-                                    blurRadius: 8.0)
-                              ]),
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () {},
-                              child: Center(
-                                child: Text("SIGNIN",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Poppins-Bold",
-                                        fontSize: 18,
-                                        letterSpacing: 1.0)),
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+                  //SizedBox(height: ScreenUtil.getInstance().setHeight(40)),
+
                   SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(40),
+                    height: ScreenUtil.getInstance().setHeight(20),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -207,22 +130,6 @@ class Loginpage extends StatelessWidget {
                         ],
                         iconData: CustomIcons.googlePlus,
                         onPressed: () {},
-                      ),
-                      SocialIcon(
-                        colors: [
-                          Color(0xFF17ead9),
-                          Color(0xFF6078ea),
-                        ],
-                        iconData: CustomIcons.twitter,
-                        onPressed: () {},
-                      ),
-                      SocialIcon(
-                        colors: [
-                          Color(0xFF00c6fb),
-                          Color(0xFF005bea),
-                        ],
-                        iconData: CustomIcons.linkedin,
-                        onPressed: () {},
                       )
                     ],
                   ),
@@ -253,4 +160,6 @@ class Loginpage extends StatelessWidget {
       ),
     );
   }
+
+
 }

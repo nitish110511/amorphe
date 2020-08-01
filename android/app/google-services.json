@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "71251981821",
+    "firebase_url": "https://amogh-3a361.firebaseio.com",
+    "project_id": "amogh-3a361",
+    "storage_bucket": "amogh-3a361.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71251981821:android:5a288e55b699b17a275594",
+        "android_client_info": {
+          "package_name": "com.amogh.amorphe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "71251981821-4s5fudqn6e3lql0pf3fdk9ck2r6s648p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2d-O_BMgOQVGwvNKDxB-BKgFTrZlE0N0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "71251981821-4s5fudqn6e3lql0pf3fdk9ck2r6s648p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
