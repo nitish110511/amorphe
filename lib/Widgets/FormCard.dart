@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:string_validator/string_validator.dart';
 
 class FormCard extends StatefulWidget {
   _FormCard createState() => _FormCard();
@@ -68,21 +70,15 @@ class _FormCard extends State<FormCard>{
             SizedBox(
               height: ScreenUtil.getInstance().setHeight(30),
             ),
-            Text("Username",
+            Text("Email",
                 style: TextStyle(
                     fontFamily: "Poppins-Medium",
                     fontSize: ScreenUtil.getInstance().setSp(26))),
             TextFormField(
-              validator: (input) {
-                if (input.isEmpty) {
-                  return 'Provide an email';
-                }
-              },
               controller: _usernameController,
               decoration: InputDecoration(
-                  hintText: "username",
+                  hintText: "Email",
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
-              onSaved: (input) => email = input,
             ),
 
             SizedBox(
@@ -93,17 +89,11 @@ class _FormCard extends State<FormCard>{
                     fontFamily: "Poppins-Medium",
                     fontSize: ScreenUtil.getInstance().setSp(26))),
             TextFormField(
-              validator: (input) {
-                if (input.length < 6) {
-                  return 'Longer password please';
-                }
-              },
               controller: _passwordController,
               obscureText: true,
               decoration: InputDecoration(
                   hintText: "Password",
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
-              onSaved: (input) => pass = input,
             ),
             SizedBox(
               height: ScreenUtil.getInstance().setHeight(15),
@@ -164,7 +154,7 @@ class _FormCard extends State<FormCard>{
                           ]),
                       child: Center(
                         child: Text("Sign In", style: TextStyle(
-                            fontSize: 25, fontFamily: "Poppins-Medium")),
+                            fontSize: 25, fontFamily: "Poppins-Medium", color: Colors.black)),
                       )
                   ),
                 ),
@@ -183,9 +173,52 @@ class _FormCard extends State<FormCard>{
     try {
       email = _usernameController.text;
       pass = _passwordController.text;
-      print(email);
-      print(pass);
-      FirebaseUser user = (await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: pass)) as FirebaseUser;
+      if(email.isEmpty) {
+        Fluttertoast.showToast(
+            msg: "Please input an Email",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
+      }
+      else if(!isEmail(email)){
+        Fluttertoast.showToast(
+            msg: "Not a valid Email",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
+      }
+      else if(pass.isEmpty) {
+          Fluttertoast.showToast(
+              msg: "Please input a password",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.black,
+              textColor: Colors.white,
+              fontSize: 16.0,
+          );
+        }
+      else{
+        Fluttertoast.showToast(
+          msg: "Invalid Email or password",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      }
+
+        FirebaseUser user = (await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: pass)) as FirebaseUser;
     }
     catch(e){
       print(e.message);
