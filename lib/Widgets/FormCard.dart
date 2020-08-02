@@ -2,17 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class FormCard extends StatelessWidget {
+class FormCard extends StatefulWidget {
+  _FormCard createState() => _FormCard();
+}
+
+class _FormCard extends State<FormCard>{
   String email,pass;
-  FirebaseUser user;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
 
   bool _isSelected = false;
 
   void _radio() {
-    setState() {
+    setState(() {
       _isSelected = !_isSelected;
-    };
+    });
   }
 
   Widget radioButton(bool isSelected) => Container(
@@ -36,7 +41,6 @@ class FormCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-//      height: ScreenUtil.getInstance().setHeight(500),
       padding: EdgeInsets.only(bottom: 1),
       decoration: BoxDecoration(
           color: Colors.white,
@@ -74,6 +78,7 @@ class FormCard extends StatelessWidget {
                   return 'Provide an email';
                 }
               },
+              controller: _usernameController,
               decoration: InputDecoration(
                   hintText: "username",
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
@@ -93,6 +98,7 @@ class FormCard extends StatelessWidget {
                   return 'Longer password please';
                 }
               },
+              controller: _passwordController,
               obscureText: true,
               decoration: InputDecoration(
                   hintText: "Password",
@@ -103,16 +109,17 @@ class FormCard extends StatelessWidget {
               height: ScreenUtil.getInstance().setHeight(15),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-
+                SizedBox(
+                  width: 167.0,
+                ),
                 Text(
                   "Forgot Password?",
                   style: TextStyle(
                       color: Colors.blue,
                       fontFamily: "Poppins-Medium",
                       fontSize: ScreenUtil.getInstance().setSp(28)),
-                )
+                ),
               ],
 
             ),
@@ -136,10 +143,10 @@ class FormCard extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 12, fontFamily: "Poppins-Medium")),
                 SizedBox(
-                  width: 42.0,
+                  width: 43.0,
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: signin,
                   child: Container(
                       width: ScreenUtil.getInstance().setWidth(300),
                       height: ScreenUtil.getInstance().setHeight(100),
@@ -161,17 +168,27 @@ class FormCard extends StatelessWidget {
                       )
                   ),
                 ),
-                SizedBox(
-                  height: ScreenUtil.getInstance().setHeight(20),
-                ),
               ],
             ),
             SizedBox(
-              height: ScreenUtil.getInstance().setHeight(20),
+              height: ScreenUtil.getInstance().setHeight(40),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void signin() async{
+    try {
+      email = _usernameController.text;
+      pass = _passwordController.text;
+      print(email);
+      print(pass);
+      FirebaseUser user = (await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: pass)) as FirebaseUser;
+    }
+    catch(e){
+      print(e.message);
+    }
   }
 }

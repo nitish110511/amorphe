@@ -109,7 +109,7 @@ class Loginpage extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(40),
+                    height: ScreenUtil.getInstance().setHeight(20),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -149,17 +149,15 @@ class Loginpage extends StatelessWidget {
                             style: TextStyle(
                                 color: Color(0xFF5d74e3),
                                 fontFamily: "Poppins-Bold")),
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
   }
-
-
 }
