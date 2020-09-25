@@ -4,40 +4,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:string_validator/string_validator.dart';
 
-class FormCard extends StatefulWidget {
-  _FormCard createState() => _FormCard();
+class Formcard_signup extends StatefulWidget {
+  _Formcard_signup createState() => _Formcard_signup();
 }
 
-class _FormCard extends State<FormCard> {
-  String email, pass;
+class _Formcard_signup extends State<Formcard_signup> {
+  String email, pass,phone;
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-
-  bool _isSelected = false;
-
-  void _radio() {
-    setState(() {
-      _isSelected = !_isSelected;
-    });
-  }
-
-  Widget radioButton(bool isSelected) => Container(
-        width: 16.0,
-        height: 16.0,
-        padding: EdgeInsets.all(2.0),
-        decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(width: 2.0, color: Colors.black)),
-        child: isSelected
-            ? Container(
-                width: double.infinity,
-                height: double.infinity,
-                decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: Colors.black),
-              )
-            : Container(),
-      );
-
+  final _phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,7 +36,7 @@ class _FormCard extends State<FormCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text("Login",
+            Text("Sign Up",
                 style: TextStyle(
                     fontSize: ScreenUtil.getInstance().setSp(45),
                     fontFamily: "Poppins-Bold",
@@ -94,82 +69,57 @@ class _FormCard extends State<FormCard> {
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
             ),
             SizedBox(
-              height: ScreenUtil.getInstance().setHeight(15),
-            ),
-            Row(
-              children: <Widget>[
-                SizedBox(
-                  width: 167.0,
-                ),
-                Text(
-                  "Forgot Password?",
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontFamily: "Poppins-Medium",
-                      fontSize: ScreenUtil.getInstance().setSp(28)),
-                ),
-              ],
-            ),
-            SizedBox(
               height: ScreenUtil.getInstance().setHeight(20),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: _radio,
-                  child: radioButton(_isSelected),
-                ),
-                SizedBox(
-                  width: 8.0,
-                ),
-                SizedBox(
-                  height: ScreenUtil.getInstance().setHeight(20),
-                ),
-                Text("Remember me",
-                    style:
-                        TextStyle(fontSize: 12, fontFamily: "Poppins-Medium")),
-                SizedBox(
-                  width: 43.0,
-                ),
-                InkWell(
-                  onTap: signin,
-                  child: Container(
-                      width: ScreenUtil.getInstance().setWidth(300),
-                      height: ScreenUtil.getInstance().setHeight(100),
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              colors: [Color(0xFF00c853), Color(0xFF6078ea)]),
-                          borderRadius: BorderRadius.circular(6.0),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Color(0xFF6078ea).withOpacity(.3),
-                                offset: Offset(0.0, 8.0),
-                                blurRadius: 4.0)
-                          ]),
-                      child: Center(
-                        child: Text("Sign In",
-                            style: TextStyle(
-                                fontSize: 25,
-                                fontFamily: "Poppins-Medium",
-                                color: Colors.black)),
-                      )),
-                ),
-              ],
+            Text("Phone",
+                style: TextStyle(
+                    fontFamily: "Poppins-Medium",
+                    fontSize: ScreenUtil.getInstance().setSp(26))),
+            TextFormField(
+              controller: _phoneController,
+              obscureText: true,
+              decoration: InputDecoration(
+                  hintText: "Phone Number",
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
             ),
             SizedBox(
-              height: ScreenUtil.getInstance().setHeight(40),
+              height: ScreenUtil.getInstance().setHeight(15),
+            ),
+
+            InkWell(
+              onTap: signup,
+              child: Container(
+                  width: ScreenUtil.getInstance().setWidth(300),
+                  height: ScreenUtil.getInstance().setHeight(100),
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          colors: [Color(0xFF00c853), Color(0xFF6078ea)]),
+                      borderRadius: BorderRadius.circular(6.0),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Color(0xFF6078ea).withOpacity(.3),
+                            offset: Offset(0.0, 8.0),
+                            blurRadius: 4.0)
+                      ]),
+                  child: Center(
+                    child: Text("Sign Up",
+                        style: TextStyle(
+                            fontSize: 25,
+                            fontFamily: "Poppins-Medium",
+                            color: Colors.black)),
+                  ),
+              ),
             ),
           ],
         ),
       ),
     );
   }
-
-  void signin() async {
+  void signup() async {
     try {
       email = _usernameController.text;
       pass = _passwordController.text;
+      phone = _phoneController.text;
       if (email.isEmpty) {
         Fluttertoast.showToast(
             msg: "Please input an Email",

@@ -6,7 +6,7 @@ import 'Widgets/FormCard.dart';
 import 'Widgets/SocialIcons.dart';
 import 'CustomIcons.dart';
 import 'package:flutter/src/material/colors.dart';
-
+import 'SignUp.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
-      seconds: 6,
+      seconds: 5,
       backgroundColor: Colors.white,
       image: Image.asset('assets/logo.jpg'
       ),
@@ -41,7 +41,6 @@ class _MyAppState extends State<MyApp> {
 
 class Loginpage extends StatelessWidget {
   @override
-
   Widget horizontalLine() => Padding(
     padding: EdgeInsets.symmetric(horizontal: 16.0),
     child: Container(
@@ -51,7 +50,6 @@ class Loginpage extends StatelessWidget {
     ),
   );
 
-  @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance =
@@ -93,8 +91,6 @@ class Loginpage extends StatelessWidget {
                     height: ScreenUtil.getInstance().setHeight(30),
                   ),
                   FormCard(),
-                  //SizedBox(height: ScreenUtil.getInstance().setHeight(40)),
-
                   SizedBox(
                     height: ScreenUtil.getInstance().setHeight(20),
                   ),
@@ -144,7 +140,12 @@ class Loginpage extends StatelessWidget {
                         style: TextStyle(fontFamily: "Poppins-Medium"),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SignUp()),
+                          );
+                        },
                         child: Text("SignUp",
                             style: TextStyle(
                                 color: Color(0xFF5d74e3),
